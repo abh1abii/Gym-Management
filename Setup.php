@@ -2,7 +2,7 @@
     session_start();
     if(!isset($_SESSION['admin_username']))
     {
-        header("location: admin_login.php");
+        header("location: Setup.php");
     }
     if(isset($_POST['logout']))
     {
@@ -18,7 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="adminPanelStyle.css">
-    <title>Admin Panel</title>
+    <title>Setup</title>
 </head>
 <body>
     <input type="checkbox" id="check">
@@ -53,7 +53,7 @@
         <a href="#"><i class="fas fa-table"></i> <span>Package Details</span> </a>
         <a href="#"><i class="fa fa-credit-card"></i> <span>Payments</span> </a>
         <a href="#"><i class="fa fa-user-md"></i> <span>Trainers</span> </a>
-        <a href="#"><i class="fas fa-sliders-h"></i> <span>Settings</span> </a>
+        <a href="./Setup.php"><i class="fas fa-sliders-h"></i> <span>Settings</span> </a>
     
     
     

@@ -13,7 +13,7 @@
         }
         else 
         {
-            echo "<script>alert('Incorrect Credentials.');</script>";
+            echo "<script>alert('Incorrect username or password!');</script>";
         }
     }
 ?>
