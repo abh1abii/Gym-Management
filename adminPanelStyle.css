@@ -18,6 +18,8 @@ body{
     text-transform: uppercase;
     font-size: 22px;
     font-weight: 900;
+    /* position: absolute */
+    
   }
   
   .left_area span{
@@ -40,7 +42,8 @@ body{
   }
   
   .logout_button:hover{
-    background: #e3f5fa;
+    background: #f78f5f;
+    color:rgb(255, 255, 255)
   }
   
   .sidebar {
@@ -91,7 +94,7 @@ body{
   label #sidebar_button{
     z-index: 1;
     color: #fff;
-    position: fixed;
+    /* position: fixed; */
     cursor: pointer;
     left: 300px;
     font-size: 20px;
