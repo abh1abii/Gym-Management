@@ -24,7 +24,8 @@
     
     <?php include("./HeaderSidebar.php");
     ?>
-    
+    <div class="content">
+    </div>
 
     
 

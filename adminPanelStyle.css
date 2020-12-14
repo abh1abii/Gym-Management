@@ -19,7 +19,9 @@ body{
     font-size: 22px;
     font-weight: 900;
     /* position: absolute */
-    
+    float: left;
+    margin-top: -28px;
+    margin-left: 40px;
   }
   
   .left_area span{

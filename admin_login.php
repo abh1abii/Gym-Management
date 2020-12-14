@@ -21,6 +21,7 @@
 <head>
 <title>Admin Login Panel</title>
 <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<link rel="stylesheet" type="text/css" href="admin_login.css">
 
 <script src="https://kit.fontawesome.com/cd0eff0a5d.js" 
 crossorigin="anonymous"></script>
@@ -32,14 +33,18 @@ crossorigin="anonymous"></script>
             <div class="input-field">
                 <i class="fas fa-user"></i>
                 <input type="text" placeholder="Username" name="admin_username">
+                
             </div>
             <div class="input-field">
                 <i class="fas fa-lock"></i>
                 <input type="password" placeholder="Password" name="admin_password">
+                <button type="submit" name="Signin">Sign in</button>
             </div>
-            <button type="submit" name="Signin">Sign in</button>
+            <!-- <button type="submit" name="Signin">Sign in</button> -->
             <div class="extra">
-            <a href="#">Forgot password?</a>
+            <p>
+            <a href="./forgotPassword.php">Forgot password?</a>
+            </p>
             </div>
         </form>
     </div>
