@@ -3,6 +3,7 @@ body{
     padding: 0;
     font-family: "Roboto", sans-serif;
   }
+  html,body{overflow-y: scroll; }
   
   header{
     position: fixed;
@@ -58,6 +59,7 @@ body{
     height: 100%;
     transition: 0.5s;
     transition-property: left;
+    overflow-y: scroll;
   }
   
   .sidebar .profile_image{

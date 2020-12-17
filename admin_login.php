@@ -1,21 +1,21 @@
 <?php
-    require("connection.php");
-    require("../credentials.php");
-    if(isset($_POST['Signin']))
-    {
-        $query = "SELECT * FROM `admin_login` WHERE `admin_name`='$_POST[admin_username]' AND `admin_password`='$_POST[admin_password]'";
-        $result=mysqli_query($connectionObj,$query);
-        if(mysqli_num_rows($result)==1)
-        {
-            session_start();
-            $_SESSION['admin_username']=$_POST['admin_username'];
-            header("location: adminPanel.php");
-        }
-        else 
-        {
-            echo "<script>alert('Incorrect username or password!');</script>";
-        }
-    }
+      require("connection.php");
+      require("../credentials.php");
+      if(isset($_POST['Signin']))
+      {
+          $query = "SELECT * FROM `admin_login` WHERE `admin_name`='$_POST[admin_username]' AND `admin_password`='$_POST[admin_password]'";
+          $result=mysqli_query($connectionObj,$query);
+          if(mysqli_num_rows($result)==1)
+          {
+              session_start();
+              $_SESSION['admin_username']=$_POST['admin_username'];
+              header("location: adminPanel.php");
+          }
+          else 
+          {
+              echo "<script>alert('Incorrect username or password!');</script>";
+          }
+      }
 ?>
 <html>
 <head>

@@ -25,6 +25,8 @@
             if($delResult)
             {
                 echo "<script>alert('Deleted!')</script>";
+                echo '<script type="text/javascript">location.reload(true);</script>';
+                
             }
             
         }
@@ -71,6 +73,7 @@
                 color: white;
                 padding-right: 20px;
                 max-height: 80%;
+                overflow-y: scroll;
                 
             }
             .container
@@ -96,6 +99,7 @@
                 color: white;
                 padding-right: 20px;
                 max-height: 80%;
+                overflow-y: scroll;
             }
             .activityButton
             {
@@ -119,6 +123,8 @@
                 background: #f78f5f;
                 color:rgb(255, 255, 255)
             }
+            
+            
         </style>
         <div class="container">
 
@@ -192,6 +198,7 @@
                         }
                         else 
                         {
+                        // {   $hashPassword=password_hash($setPassword,PASSWORD_DEFAULT);
                             $query="INSERT INTO admin_login VALUES('$setUsername','$setPassword')";
                             mysqli_query($connectionObj,$query);
                             echo '<script type="text/javascript">location.reload(true);</script>';
