@@ -2,16 +2,6 @@
     require("connection.php");
     require("../credentials.php");
     session_start();
-    $uid = rand(0001,5000);
-    $user_list = mysqli_query($connectionObj,"SELECT * FROM Members");
-    while ($user = mysqli_fetch_array($user_list))
-    {
-        if ($uid == $user['Member_ID'])
-        {
-            echo '<script type="text/javascript">location.reload(true);</script>';
-        }
-    }
-
     if(!isset($_SESSION['admin_username']))
     {
         header("location: admin_login.php");
@@ -21,28 +11,41 @@
         session_destroy();
         header("location: admin_login.php");
     }
-    // if(isset($_POST['delete-btn']))
-    // {
-    //     $delName=$_POST['delUser'];
-    //     if($delName==$_SESSION['admin_username'])
-    //     {
-    //         echo "<script>alert('User Active! Deletion failed!')</script>";
-    //     }
-    //     else
-    //     {
-    //         $delQuery="DELETE FROM `admin_login` WHERE `admin_name`='$delName';";
-    //         $delResult=mysqli_query($connectionObj,$delQuery);
-    //         if($delResult)
-    //         {
-    //             echo "<script>alert('Deleted!')</script>";
-    //             echo '<script type="text/javascript">location.reload(true);</script>';
+    $MemberID=$_GET['memberID'];
+    $query="SELECT * FROM `Members` where Member_ID='$MemberID';";
+                $result=mysqli_query($connectionObj,$query);
                 
-    //         }
-            
-    //     }
-
-    // }
+                while($row=mysqli_fetch_array($result))
+                {
+                    $firstName=$row['First_name'];
+                    $lastName=$row['Last_name'];
+                    $gender=$row['Gender'];
+                    $email=$row['email'];
+                    $contact=$row['contact'];
+                    $Trainer_ID=$row['Trainer_ID'];
+                }
     
+                if(isset($_POST['delete-btn']))
+                {   $query="SELECT * FROM `Members`;";
+                    $result=mysqli_query($connectionObj,$query);
+                    if(mysqli_num_rows($result)==1)
+                    {
+                        echo "<script>alert('Table should contain atleast 1 entry!');</script>";
+                        echo '<script type="text/javascript">location.reload(true);</script>';
+                    }
+                    else{
+                        $delMemID=$MemberID;
+                        $delQuery="DELETE FROM `Members` WHERE `Member_ID`='$delMemID';";
+                            $delResult=mysqli_query($connectionObj,$delQuery);
+                            if($delResult)
+                            {
+                                echo "<script>alert('Deleted!')</script>";
+                                echo "<script>window.location.href = \"./memberDetails.php\";</script>";
+                                
+                            }
+                    }
+            
+                }
 ?>
 
 <!DOCTYPE html>
@@ -52,12 +55,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
         <link rel="stylesheet" href="adminPanelStyle.css">
-        <title>Register</title>
+        <title>Edit Member</title>
     </head>
     <body ><?php include("./HeaderSidebar.php");?>
         <div class="content">
         </div>
         <style>
+            .disnone{
+                opacity:0;
+            }
             #check:checked ~ .container
             {
         
@@ -140,30 +146,30 @@
 
 
 
-            <!-- registration section start -->
-            <h1><center>Member Registration</center></h1>
             
-            <form action="adminPanel.php" method="post" > 
+            <h1><center>Edit Member Details</center></h1>
+            
+            <form method="post" > 
                 <table>
                 <div><tr>
                                 
                                 <td>Member ID</td>
                                 <!-- <td><input type="text" name="setMemberID"> </td> -->
-                                <td><?php echo "$uid";?></td>
+                                <td><?php echo "$MemberID";?></td>
                             </tr>    
                         </div>
                         <div>
                             <tr>
                                 
                                 <td>First Name</td>
-                                <td><input type="text" name="setFN"></td>
+                                <td><input type="text" name="setFN" value=<?php echo "$firstName"?>></td>
                             </tr>    
                         </div>   
 
                         <div><tr>
                                 
                                 <td>Last Name</td>
-                                <td><input type="text" name="setLN"> </td>
+                                <td><input type="text" name="setLN" value=<?php echo "$lastName"?>> </td>
                             </tr>    
                         </div>
                         <div>
@@ -171,24 +177,52 @@
                                 
                                 <td>Gender</td>
                                 <td>
-                                    <select name="setGender" >
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                    </td>
+                                <?php
+                                if($gender=="male")
+                                { echo "
+                                  <select name=\"setGender\" >
+                                        <option value=\"male\" selected>Male</option>
+                                        <option value=\"female\">Female</option>
+                                        <option value=\"other\">Other</option>
+                                    </select>";
+                                }
+                                else if($gender=="female")
+                                { echo "
+                                  <select name=\"setGender\" >
+                                        <option value=\"male\" >Male</option>
+                                        <option value=\"female\" selected>Female</option>
+                                        <option value=\"other\">Other</option>
+                                    </select>";
+                                }
+                                else
+                                {
+                                  echo "
+                                  <select name=\"setGender\" >
+                                        <option value=\"male\" >Male</option>
+                                        <option value=\"female\" >Female</option>
+                                        <option value=\"other\" selected>Other</option>
+                                    </select>";
+
+                                }
+                                
+                                ?>  
+                                
+                                
+                                
+                                </td>
+                                    
                             </tr>  
                         </div> 
                         <div><tr>
                                 
                                 <td>e-mail</td>
-                                <td><input type="text" name="setEmail"> </td>
+                                <td><input type="text" name="setEmail" value=<?php echo "$email"?>> </td>
                             </tr>    
                         </div> 
                         <div><tr>
                                 
                                 <td>Contact</td>
-                                <td><input type="text" name="setPhone"> </td>
+                                <td><input type="text" name="setPhone" value=<?php echo "$contact"?>> </td>
                             </tr>    
                         </div>
                         
@@ -203,7 +237,12 @@
                                         {
                                             $trainerName=$row['Name'];
                                             $trainerID=$row['Trainer_ID'];
-                                            echo "<option value=$trainerID>$trainerID - $trainerName</option>";
+                                            echo "<option value=\"$trainerID\" ";
+                                            if($trainerID==$Trainer_ID)
+                                            {
+                                              echo "selected";
+                                            }
+                                            echo ">$trainerID - $trainerName</option>";
                                         }
                                 ?>
 
@@ -213,7 +252,7 @@
 
                         <tr>
                             <td></td>
-                            <td><button type="submit" name="create_btn" class="activityButton">Create</button></td>
+                            <td><button type="submit" name="create_btn" class="activityButton">Update</button></td>
                         </tr> 
                 </table>
             </form>
@@ -242,17 +281,29 @@
                         {echo "<script>alert('Empty Phone Number!');</script>";}
                     else if(!(is_numeric($setPhone)) )
                         {echo "<script>alert('Invalid Phone Number error!');</script>";}
-                    else {
-                    // {       echo "<script>alert('$setGender');</script>";
-                            $query="INSERT INTO `Members` (`First_name`, `Last_name`, `Gender`, `email`, `contact`, `Member_ID`, `Trainer_ID`) VALUES
-                            ('$setFN', '$setLN', '$setGender', '$setEmail', '$setPhone', '$uid', '$setTrainerID');";
+                    else 
+                    {   
+                            $query="Update `Members`
+                            set `First_name`='$setFN',
+                             `Last_name`='$setLN',
+                             `Gender`='$setGender',
+                            `email`='$setEmail',
+                             `contact`='$setPhone',
+                             `Trainer_ID`='$setTrainerID'
+                            where `Members`.`Member_ID`='$MemberID';";
                             $res=mysqli_query($connectionObj,$query);
+                            
                             if($res)
                             {
-                                echo "<script>alert('Member Created!');</script>";
+                                echo "<script>alert('Member Details Updated!');</script>";
+
                             }
+                            else{
+                              echo "<script>alert('error');</script>";
+                            }
+                            echo "<script>window.location.href = \"./memberDetails.php\";</script>";
                             
-                            echo '<script type="text/javascript">location.reload(true);</script>';
+                            
                         
                         
                     }
@@ -261,6 +312,14 @@
 
 
             ?>
+            <!--  -->
+            
+            <form method="POST">
+
+            <table ><tr><td class=disnone>................</td><td >
+            <button type="submit" name="delete-btn" class="activityButton">DELETE Member</button></td>
+            </table>
+          </form>
             
 
 

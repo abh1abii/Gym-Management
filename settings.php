@@ -32,6 +32,17 @@
         }
 
     }
+    $query="SELECT * FROM `tax` where `priority`=(Select max(priority)); ";
+    $result=mysqli_query($connectionObj,$query);
+    $ServiceTax=0;
+    $GST=0;            
+    while($row=mysqli_fetch_array($result))
+    {
+        $ServiceTax=$row['serviceTax'];
+        $GST=$row['GST'];
+        $priority=$row['priority'];
+        
+    }
     
 ?>
 
@@ -245,6 +256,68 @@
 
                 </select><button type="submit" name="delete-btn" class="activityButton">DELETE</button>
             </form>
+            <h2>Update Tax Percentage</h2>
+            <form action="./settings.php" method="post">
+                <table>
+                    <tr>
+                        <td>Service Tax:</td>
+                        <td><input type="text" name="setServiceTax" value=<?php echo "$ServiceTax"?>></td>
+                    </tr>
+                    <tr>
+                        <td>GST:</td>
+                        <td><input type="text" name="setGST" value=<?php echo "$GST"?>></td>
+                    </tr>
+                    <tr>
+                            <td></td>
+                            <td><button type="submit" name="taxButton" class="activityButton">Update</button></td>
+                        </tr> 
+                </table>
+        
+        
+            </form>
+            <?php
+            if(isset($_POST['taxButton']))
+                {
+                
+                    $setServiceTax= mysqli_real_escape_string($connectionObj,$_POST['setServiceTax']);
+                    $setGST= mysqli_real_escape_string($connectionObj,$_POST['setGST']);
+                    
+                    if(empty($setServiceTax))
+                        {echo "<script>alert('Empty Filed');</script>";}
+                    else if(empty($setGST))
+                        {echo "<script>alert('Empty Field');</script>";}
+                    
+                    else if(!(is_numeric($setServiceTax+$setGST)) )
+                        {echo "<script>alert('Invalid Value!');</script>";}
+                    else 
+                    {   
+                            $queryTax="Update `tax`
+                            set `serviceTax`='$setServiceTax',
+                             `GST`='$setGST' where `priority`='$priority'";
+                            // echo "<script>alert('$setServiceTax, $setGST, $priority');</script>";
+                            
+                            $resTax=mysqli_query($connectionObj,$queryTax);
+                            // echo "<script>alert('$resTax');</script>";
+                            
+                            if($resTax)
+                            {
+                                echo "<script>alert('TAX Details Updated!');</script>";
+
+                            }
+                            else{
+                              echo "<script>alert('error');</script>";
+                            }
+                            echo "<script>window.location.href = \"./settings.php\";</script>";
+                            
+                            
+                        
+                        
+                    }
+                }
+
+
+
+            ?>
 
 
             <!-- registration section end -->
