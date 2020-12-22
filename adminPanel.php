@@ -147,9 +147,9 @@
                 <table>
                 <div><tr>
                                 
-                                <td>Member ID</td>
-                                <!-- <td><input type="text" name="setMemberID"> </td> -->
-                                <td><?php echo "$uid";?></td>
+                                <!-- <td>Member ID</td>
+                                 <td><input type="text" name="setMemberID"> </td> 
+                                <td><?php //echo "$uid";?></td> -->
                             </tr>    
                         </div>
                         <div>

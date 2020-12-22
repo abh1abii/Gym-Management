@@ -32,6 +32,15 @@
         }
 
     }
+    $tid = rand(0001,5000);
+    $train_list = mysqli_query($connectionObj,"SELECT * FROM Trainer");
+    while ($row = mysqli_fetch_array($train_list))
+    {
+        if ($tid == $row['Trainer_ID'])
+        {
+            echo '<script type="text/javascript">location.reload(true);</script>';
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -168,8 +177,8 @@
                         <div>
                             <tr>
                                 
-                                <td>Trainer ID:</td>
-                                <td><input type="text" name="setTrainerID"></td>
+                                <!-- <td>Trainer ID:</td>
+                                <td><?php //echo "$tid";?></td> -->
                             </tr>    
                         </div>   
 
@@ -199,7 +208,7 @@
                 {
                 
                     $setTrainerName= mysqli_real_escape_string($connectionObj,$_POST['setTrainerName']);
-                    $setTrainerID= mysqli_real_escape_string($connectionObj,$_POST['setTrainerID']);
+                    $setTrainerID= $tid;
                     $setTrainerPhone= mysqli_real_escape_string($connectionObj,$_POST['setTrainerPhone']);
                     if(empty($setTrainerName))
                         {echo "<script>alert('Empty Trainer Name');</script>";}
