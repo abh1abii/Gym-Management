@@ -37,7 +37,7 @@
     <?php include("./HeaderSidebar.php");?>
         <div class="content">
         </div>
-        <style>
+        <!-- <style>
             #check:checked ~ .container
             {
         
@@ -112,7 +112,7 @@
                 background: #f78f5f;
                 color:rgb(255, 255, 255)
             }
-        </style>
+        </style> -->
         <div class="container">
 
 
@@ -124,7 +124,7 @@
             <h2>Transactions</h2>
 
             <?php
-                 $query="SELECT * FROM `Payment`;";
+                 $query="SELECT * FROM `Payment` order by `DateTime` DESC   ;";
                  $result=mysqli_query($connectionObj,$query);
                  echo "<table><tr>
                  <th>Payment ID</th>

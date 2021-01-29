@@ -25,27 +25,7 @@
                     $Trainer_ID=$row['Trainer_ID'];
                 }
     
-                if(isset($_POST['delete-btn']))
-                {   $query="SELECT * FROM `Members`;";
-                    $result=mysqli_query($connectionObj,$query);
-                    if(mysqli_num_rows($result)==1)
-                    {
-                        echo "<script>alert('Table should contain atleast 1 entry!');</script>";
-                        echo '<script type="text/javascript">location.reload(true);</script>';
-                    }
-                    else{
-                        $delMemID=$MemberID;
-                        $delQuery="DELETE FROM `Members` WHERE `Member_ID`='$delMemID';";
-                            $delResult=mysqli_query($connectionObj,$delQuery);
-                            if($delResult)
-                            {
-                                echo "<script>alert('Deleted!')</script>";
-                                echo "<script>window.location.href = \"./memberDetails.php\";</script>";
-                                
-                            }
-                    }
-            
-                }
+                
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +40,7 @@
     <body ><?php include("./HeaderSidebar.php");?>
         <div class="content">
         </div>
-        <style>
+        <!-- <style>
             .disnone{
                 opacity:0;
             }
@@ -141,7 +121,7 @@
             }
             
             
-        </style>
+        </style> -->
         <div class="container">
 
 
@@ -309,17 +289,44 @@
                     }
                 }
 
+                if(isset($_POST['delete-btn']))
+                {   $query="SELECT * FROM `Members`;";
+                    $result=mysqli_query($connectionObj,$query);
+                    if(mysqli_num_rows($result)==1)
+                    {
+                        echo "<script>alert('Table should contain atleast 1 entry!');</script>";
+                        echo '<script type="text/javascript">location.reload(true);</script>';
+                    }
+                    else{
+                        $delMemID=$MemberID;
+                         
+                        $delQuery="DELETE FROM `Members` WHERE `Member_ID`='$delMemID';";
+                            $delResult=mysqli_query($connectionObj,$delQuery);
+                            if($delResult)
+                            {
+                                echo "<script>alert('Deleted!')</script>";
+                                echo "<script>window.location.href = \"./memberDetails.php\";</script>";
+                                
+                            }
+                            else {
+                                echo "<script>alert('Verified User with Purchases Cannot be deleted!')</script>";
+                                echo "<script>window.location.href = \"./memberDetails.php\";</script>";
+                            }
+                    }
+            
+                }
+
 
 
             ?>
             <!--  -->
             
-            <form method="POST">
+            <!-- <form method="POST">
 
             <table ><tr><td class=disnone>................</td><td >
             <button type="submit" name="delete-btn" class="activityButton">DELETE Member</button></td>
             </table>
-          </form>
+          </form> -->
             
 
 

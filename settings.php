@@ -58,7 +58,7 @@
     <body ><?php include("./HeaderSidebar.php");?>
         <div class="content">
         </div>
-        <style>
+        <!-- <style>
             #check:checked ~ .container
             {
         
@@ -136,7 +136,7 @@
             }
             
             
-        </style>
+        </style> -->
         <div class="container">
 
 

@@ -77,7 +77,7 @@
     <body ><?php include("./HeaderSidebar.php");?>
         <div class="content">
         </div>
-        <style>
+        <!-- <style>
             .disnone{
                 opacity:0;
             }
@@ -158,7 +158,7 @@
             }
             
             
-        </style>
+        </style> -->
         <div class="container">
 
 
@@ -285,14 +285,22 @@
                   $res=mysqli_query($connectionObj,$query);
                   
                   if($res)
-                  {
-                      echo "<script>alert('Payment Successful!');</script>";
+
+                  { 
+                    
+                    
+                    $number=$contact;
+                    $amount=$Amount;
+                    $payID=$pid;  
+                    echo "<script>
+                    window.location.href = \"./sms.php?phoneNo=$number&amount=$amount&payID=$payID\";
+                    </script>";
 
                   }
                   else{
                     echo "<script>alert('error');</script>";
                   }
-                  echo "<script>window.location.href = \"./payments.php\";</script>";
+                  //echo "<script>window.location.href = \"./payments.php\";</script>";
                             
                             
                         

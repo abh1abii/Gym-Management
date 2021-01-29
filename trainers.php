@@ -57,7 +57,7 @@
     <?php include("./HeaderSidebar.php");?>
         <div class="content">
         </div>
-        <style>
+        <!-- <style>
             #check:checked ~ .container
             {
         
@@ -132,7 +132,7 @@
                 background: #f78f5f;
                 color:rgb(255, 255, 255)
             }
-        </style>
+        </style> -->
         <div class="container">
 
 

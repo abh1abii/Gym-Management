@@ -48,7 +48,7 @@
     <?php include("./HeaderSidebar.php");?>
         <div class="content">
         </div>
-        <style>
+        <!-- <style>
             #check:checked ~ .container
             {
         
@@ -123,7 +123,7 @@
                 background: #f78f5f;
                 color:rgb(255, 255, 255)
             }
-        </style>
+        </style> -->
         <div class="container">
 
 
@@ -135,7 +135,7 @@
             <h2>List of Packages</h2>
 
             <?php
-                 $query="SELECT * FROM `Package`;";
+                 $query="CALL `query_package`();";
                  $result=mysqli_query($connectionObj,$query);
                  echo "<table><tr>
                  <th>Package_ID</th>
@@ -162,8 +162,8 @@
                  echo "</table>";
             ?>
             
-            <h2>Add New Packages</h2>
-            <form action="package.php" method="post" > 
+            <!-- <h2>Add New Packages</h2>
+            <form  method="post" > 
                 <table>
                         <div>
                             <tr>
@@ -194,77 +194,22 @@
                 </table>
             </form>
             <?php
-                global $connectionObj;
-                if(isset($_POST['create_btn']))
-                {
+                // global $connectionObj;
+                // if(isset($_POST['create_btn']))
+                // {
                 
-                    $setPackageName= mysqli_real_escape_string($connectionObj,$_POST['setPackageName']);
-                    $setPackageID= mysqli_real_escape_string($connectionObj,$_POST['setPackageID']);
-                    $setAmount= mysqli_real_escape_string($connectionObj,$_POST['setAmount']);
-                    if(empty($setPackageName))
-                        {echo "<script>alert('Empty Package Name');</script>";}
-                    else if(empty($setPackageID))
-                        {echo "<script>alert('Empty Package ID!');</script>";}
-                    else if(empty($setAmount))
-                        {echo "<script>alert('Empty Amount error!');</     script>";}
-                    else if(!(is_numeric($setAmount)) )
-                        {echo "<script>alert('Invalid Amount error!');</script>";}
-                    
-                    else 
-                    {   $Package_exists_query = "SELECT * FROM                 Package WHERE Package_name = '$setPackageName' OR Package_ID = '$setPackageID'";
-
-                        $Package_check = mysqli_query($connectionObj,$Package_exists_query);
-                        $Pack=mysqli_fetch_assoc($Package_check);
-                        if($Pack)
-                        {    
-                            if($Pack['Package_name']===$setPackageName || $Pack['Package_ID']===$setPackageID) 
-                            {
-                                echo "<script>alert('Package already exists.');</script>";
-                            }
-                            
-                            
-                            
-                        }
-                        else 
-                        {
-                        
-                            $query="INSERT INTO Package VALUES('$setPackageID','$setPackageName',$setAmount)";
-                            mysqli_query($connectionObj,$query);
-                            echo '<script type="text/javascript">location.reload(true);</script>';
-                        }
-                        
-                    }
-                }
+                //     include("packinsert.php");
+                // }
 
 
 
                
             ?>
-            <h2>Delete Package</h2>
-            <form method="POST">
-                Select Package to Delete: <select name="delPackID">
-                    <?php 
-                        $query="SELECT * FROM `Package`;";
-                        $result=mysqli_query($connectionObj,$query);
-                        
-                       
-                        
-                        
-                        while($row = mysqli_fetch_array($result))
-                            {
-                            $Package_name=$row['Package_name'];
-                            $packageID=$row['Package_ID'];
-                            echo "<option value=$packageID> $packageID - <b>$Package_name</b> </option>";
-                            }
-                        
-                    ?>
+             <h2>Delete Package</h2>
+            <!-- <?php include("packDel.php");?> -->
 
-                </select><button type="submit" name="delete-btn" class="activityButton">DELETE</button>
-            </form>
-
-
-            <!-- registration section end -->
-        </div>
+            <!-- registration section end 
+        </div> -->
 
 
     

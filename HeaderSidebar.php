@@ -21,7 +21,7 @@
     <!-- END OF HEADER AREA-->
 
     <!-- SIDEBAR AREA-->
-    <div class="sidebar">
+    <div class="sidebar">      
         <center>
             <img src="./Images/avatar.png" alt="Profile Picture Missing!" class="profile_image">
         </center>
